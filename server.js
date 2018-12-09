@@ -21,6 +21,7 @@ var players = {};
 io.on('connection', function(socket) {
   playercount++;
   console.log('Some one connected to your page!');
+  io.emit('message', "System: Some one connected to this page!");
   players[socket.id]={name:''};
   socket.on('new player', function(data) {
     players[socket.id] = {
@@ -33,11 +34,17 @@ io.on('connection', function(socket) {
       blood:100,
       name:data
     };
+    io.emit('message', "System: "+data+ " has joined the game!");
+    io.emit('message', "System: "+playercount+" Online");
     console.log(players[socket.id].name+" has joined the game! ("+playercount+" online)");
     vao = true;
     io.emit('new', players[socket.id].name, socket.id);
     io.to(socket.id).emit('name', players[socket.id].name);
   });
+  socket.on('mess', data=>{
+  	io.emit('message', data);
+  	console.log(data);
+  })
   // socket.on('')
   socket.on('bullet', (data1,data2,data3,data4,data5,data6)=>{
   	socket.broadcast.emit('shoot', data1,data2,data3,data4,data5,data6);
@@ -52,21 +59,25 @@ io.on('connection', function(socket) {
   });
   socket.on('disconnect', ()=>{
   	playercount--;
+  	// io.emit('message', "System: Some one has disconnected!");
   	if (!players[socket.id].name) players[socket.id].name='undefined';
   	// if (players[socket.id].name!=undefined) playercount--;
 	console.log(players[socket.id].name+" has quit the game! ("+playercount+" online)");
     // players[socket.id].status='off';
     // players[socket.id]=undefined;
     // console.log(players[socket.id]);
+    io.emit('message', "System: "+players[socket.id].name+" has quit the game!");
+    io.emit('message', "System: "+playercount+" Online");
     io.emit('remove', socket.id, players[socket.id].name);
-    console.log('###################################');
-    console.log(players);
+    // console.log('###################################');
+    // console.log(players);
     delete players[socket.id];
-    console.log('\n----TO----\n')
-    console.log(players);
+    // console.log('\n----TO----\n')
+    // console.log(players);
     // console.log(players[socket.id]);
   });
   socket.on('die', (data)=>{
+    io.emit('message', data);
   	delete players[socket.id];
   	io.emit('kill', data, socket.id);
   })

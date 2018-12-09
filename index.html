@@ -4,23 +4,31 @@
 	<meta charset="utf-8">
 	<title>GAME ONLINE</title>
 </head>
-<body>
+<body style="background-color: #678482">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<div id="main" style="height: 100%; width: 100%; position: fixed; top: 0; left: 0;"></div>
 	<script>
     	var ok=false;
 		var vao_ed=false;
-    	var weapon='ak47';
+		var weapon='ak47';
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
 	<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script src="client.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.min.js"></script>
 	<script src="sketch/p5.play.js"></script>
-    <script src="sketch/game.min.js"></script>
+	<div id="chatBox">
+		<div id="conversation"></div>
+		<div id="typing">
+			<input id="inputMes" type="text" placeholder="press Enter to add message...">
+			<input id="showHideChat" type="submit" name="Hide" value="Hide">
+		</div>
+	</div>
+    <script src="sketch/game.js"></script>
     <div id="thongbao" style="text-align: center; border: medium;position:fixed; top:0; left:0; width:100%; color: red; font-family: cursive; font-size: 20px;"></div>
+	<script src="sketch/chatbox.js"></script>
     <div id="replay" class="noselect">SPAWN</div>
-	<div align="center" style='display:none' id='a'>
+	<div align="center" id='a'>
 		<br>
 		<br>
     	<h3> HÃY NHẬP TÊN VÀ CHỌN SERVER </h3><br>
