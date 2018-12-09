@@ -1,7 +1,6 @@
 {
   "name": "test",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "dependencies": {
     "express": "^4.16.4",
@@ -14,5 +13,6 @@
     "start": "node server.js"
   },
   "author": "Khoa Dau",
-  "license": "ISC"
+  "license": "ISC",
+  "description": ""
 }
