@@ -1,7 +1,7 @@
 var app = require('express')();
-    var http = require('http').Server(app);
-    var io = require('socket.io')(http);
-    var path = require('path');
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+var path = require('path');
 var playercount=0;
 var vao = false;
     // Khởi tạo server
@@ -11,8 +11,11 @@ var vao = false;
       res.sendFile(path.join(__dirname, 'index.html'));
     });
     // Mở cổng lắng nghe của socket là 3000
-    http.listen(3000, function(){
-      console.log('listening on *:3000');
+var port = process.env.PORT || 3000;
+    http.listen(port, function(){
+      var host = server.address().address;
+   	  var port = server.address().port;
+   	  console.log('Listening on http://%s:%s', host, port);
     });
 var players = {};
 io.on('connection', function(socket) {
