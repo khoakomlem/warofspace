@@ -13,8 +13,8 @@ var vao = false;
     // Mở cổng lắng nghe của socket là 3000
 var port = process.env.PORT || 3000;
     http.listen(port, function(){
-      var host = server.address().address;
-   	  var port = server.address().port;
+      var host = http.address().address;
+   	  var port = http.address().port;
    	  console.log('Listening on http://%s:%s', host, port);
     });
 var players = {};
