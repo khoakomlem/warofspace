@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>GAME ONLINE</title>
+</head>
+<body>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<div id="main" style="height: 100%; width: 100%; position: fixed; top: 0; left: 0;"></div>
+	<script>
+    	var ok=false;
+		var vao_ed=false;
+    	var weapon='ak47';
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+	<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="client.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/p5.min.js"></script>
+	<script src="sketch/p5.play.js"></script>
+    <script src="sketch/game.min.js"></script>
+    <div id="thongbao" style="text-align: center; border: medium;position:fixed; top:0; left:0; width:100%; color: red; font-family: cursive; font-size: 20px;"></div>
+    <div id="replay" class="noselect">SPAWN</div>
+	<div align="center" style='display:none' id='a'>
+		<br>
+		<br>
+    	<h3> HÃY NHẬP TÊN VÀ CHỌN SERVER </h3><br>
+    	<table border="1" style='width: 50%; border: groove;' >
+    		<tr>
+    			<th> Tên nhân vật: </th>
+    			<td>
+    				<input type="text" id="name" style="width: 99%">
+    			</td>
+    		</tr>
+    		<tr>
+    			<th> Server: </th>
+    			<td>
+    				<select id='option' onchange="socket.emit('server',$('#option option:selected').text())" style="width: 100%">
+  						<option value="vi">Đồng Nai</option>
+  						<option value="update" disabled="disabled">Đang update...</option>
+  						<option value="update" disabled="disabled">Đang update...</option>
+  						<option value="update" disabled="disabled">Đang update</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th> Vũ khí </th>
+				<td>
+					<select id='option2' style="width: 100%">
+  						<option value="ak47">AK47</option>
+  						<option value="galin">GATLIN</option>
+  						<option value="shotgun">SHOTGUN</option>
+  						<option value="secret" disabled="disabled">BẢO TRÌ (MINE)</option>
+					</select>
+				</td>
+			</tr>
+    	</table>
+		
+		<input id='button' type="submit" value="VÀO CHƠI" onclick="vao()">
+	</div>
+</body>
+</html>
