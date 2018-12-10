@@ -101,6 +101,9 @@ socket.on('real', function(data){
 });
 document.addEventListener('keydown', function(event) {
   switch (event.keyCode) {
+    // case 27:
+      // ship.blood=-1;
+    // break;
     case LEFT_ARROW: // A
       package.left = true;
       break;
@@ -194,16 +197,17 @@ function draw() {
   
   
   // asteroids.overlap(bullets, asteroidHit);
-  if (ship.name!='§')
+  if (ship.name!='­')
   bullets2.overlap(ship, function(e){
     // bullets2.remove();
     // ship.bounce(bullets2);
     e.remove();
     if (ship.name!=undefined) {ship.blood-=e.dame;};
-    if (ship.blood<=0){
+    if (ship.blood<=0 && ship.name!=''){
       socket.emit('die',ship.name+ " has been killed by " + e.name, socket.id);
       $('#replay').slideDown(1000);
-      ship.name='§';
+      ship.name='­';
+      ship.blood=-1;
       // sprite[socket.id].name='';
       ship.remove();
       // sprite[socket.id].remove();
@@ -228,9 +232,11 @@ function draw() {
   frame++;
   if(keyDown("A") && shootable && frame>wframe)
     {
-      // if (weapon != 'SHOTGUN'){
-      var bullet = createSprite(ship.position.x, ship.position.y);
-      bullet.addImage(bulletImage);
+      var bullet;
+      if (weapon != 'SHOTGUN'){
+        bullet = createSprite(ship.position.x, ship.position.y);
+        bullet.addImage(bulletImage);
+      }
       switch (weapon){
         case 'AK47':
           bullet.rotat=ship.rotation+Math.random()*7;
@@ -248,13 +254,14 @@ function draw() {
         break;
         case 'SHOTGUN':
           for (var j=-3; j<=3; j++) {
-            var bullet = createSprite(ship.position.x, ship.position.y);
+            bullet = createSprite(ship.position.x, ship.position.y);
             bullet.addImage(bulletImage);
             bullet.speed=15+ship.getSpeed();
             bullet.life=20;
             bullet.setSpeed(bullet.speed, ship.rotation+5*j);
             socket.emit('bullet', ship.position.x, ship.position.y, ship.rotation+5*j, bullet.speed, ship.name,weapon);
             bullets.add(bullet);
+            // alert(1);
           }
         break;
         case 'MINE':
@@ -267,7 +274,7 @@ function draw() {
 
       if (weapon!='SHOTGUN'){
         bullets.add(bullet); 
-      } else bullet.remove();
+      }
       // socket.emit('bullet', ship.position.x, ship.position.y, bullet.rotation, ship.getSpeed()+10, ship.name);
       
      // killer=bullets.indexOf(bullet);
@@ -279,7 +286,9 @@ function draw() {
   }
 
   text(ship.name+' - '+Math.floor(ship.blood), ship.position.x, ship.position.y-20);
+  // alert(1);
   drawSprites();
+  // alert(1);
 }
 
 // function createAsteroid(type, x, y) {
@@ -387,7 +396,7 @@ socket.on('shoot', (data1,data2,data3,data4,data5, data6)=>{
       break;
       case 'SHOTGUN':
       bullet.life = 20;
-      bullet.dame=Math.random()*3+0.5;
+      bullet.dame=Math.random()*4+1;
       break;
       case 'MINE':
       bullet.life = 500;

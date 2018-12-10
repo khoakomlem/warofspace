@@ -1,13 +1,25 @@
-window.onload = function() {
+
+    var hide=false;
   document.getElementById('showHideChat')
-        .addEventListener('mouseover', function(event) {
-            if (event.target.value == 'Hide') {
+        .addEventListener('click', function(event) {
+            if (hide==false) {
+                hide=true;
                 showChat(false);
 
             } else {
+                hide=false;
                 showChat(true);
             }
         });
+    // $('body').keypress(function(event){
+    //     if (hide==false) {
+    //         hide=true;
+    //         showChat(false);
+    //     } else {
+    //         hide=false;
+    //         showChat(true);
+    //     }
+    // })
 
     document.getElementById('inputMes')
         .addEventListener('change', function(){
@@ -16,7 +28,7 @@ window.onload = function() {
             $('#inputMes').val('');
         })
 
-}
+
 
       function addMessage(mes, from, withTime) {
     var newMes = document.createElement('p');
