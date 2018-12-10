@@ -224,7 +224,8 @@ function draw() {
     ship.rotation += 4;
   if(package.up)
     {
-    ship.addSpeed(.2, ship.rotation);
+      ship.position.x+=4;
+    // ship.addSpeed(.2, ship.rotation);
     ship.changeAnimation("thrust");
     }
   else
@@ -257,7 +258,7 @@ function draw() {
             bullet = createSprite(ship.position.x, ship.position.y);
             bullet.addImage(bulletImage);
             bullet.speed=15+ship.getSpeed();
-            bullet.life=20;
+            bullet.life=25;
             bullet.setSpeed(bullet.speed, ship.rotation+5*j);
             socket.emit('bullet', ship.position.x, ship.position.y, ship.rotation+5*j, bullet.speed, ship.name,weapon);
             bullets.add(bullet);
@@ -395,7 +396,7 @@ socket.on('shoot', (data1,data2,data3,data4,data5, data6)=>{
       bullet.dame=Math.random()*3+1;
       break;
       case 'SHOTGUN':
-      bullet.life = 20;
+      bullet.life = 25;
       bullet.dame=Math.random()*4+1;
       break;
       case 'MINE':
