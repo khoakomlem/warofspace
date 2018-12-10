@@ -224,8 +224,8 @@ function draw() {
     ship.rotation += 4;
   if(package.up)
     {
-      ship.position.x+=4;
-    // ship.addSpeed(.2, ship.rotation);
+      // ship.position.x+=4;
+    ship.addSpeed(.2, ship.rotation);
     ship.changeAnimation("thrust");
     }
   else
